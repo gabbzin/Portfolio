@@ -46,10 +46,15 @@ header {
     position: absolute;
 }
 
-.menu-itens{
-    width: 100%;
-    display: flex;
-    justify-content: s
+#burger {
+    font-size: 1.4em;
+    text-align: end;
+    cursor: pointer;
+    padding: 5px;
+}
+
+menu {
+    display: none;
 }
 
 .links {
@@ -57,8 +62,13 @@ header {
 }
 
 .links li {
-    display: inline-block;
+    display: inline;
     margin-left: 25px;
+    padding: 2px;
+}
+
+.links li:hover{
+    background-color: #ffffff72;
 }
 .links li a {
     text-decoration: none;
