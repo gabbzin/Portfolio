@@ -98,10 +98,10 @@ export function ContactSection() {
                 <div>
                   <h4 className="font-medium">Telefone</h4>
                   <a
-                    href="tel:+5561999999999"
+                    href="tel:+5599985037478"
                     className="text-muted-foreground transition-colors hover:text-primary"
                   >
-                    +55 (61) 99999-9999
+                    +55 (99) 98503-7478
                   </a>
                 </div>
               </div>
