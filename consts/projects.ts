@@ -16,7 +16,7 @@ export const projects: Project[] = [
     description:
       "SaaS de barbearia com agendamento online e gestão de clientes.",
     image: "/projects/barbearia-saas.png",
-    tags: ["React", "TailwindCSS", "Next", "Prisma", "Stripe", "PostgreSQL"],
+    tags: ["React", "TailwindCSS", "Next", "Prisma", "PostgreSQL", "Stripe"],
     demoUrl: "https://barbearia-system-saas.vercel.app/",
     githubUrl: null, // Projeto privado
     dev: true,
