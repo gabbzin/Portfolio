@@ -41,7 +41,8 @@ export function AboutSection() {
               </a>
 
               <a
-                href="#download"
+                href="/cv/curriculo.pdf"
+                download={"curriculo.pdf"}
                 className="flex items-center gap-2 rounded-full border border-primary px-6 py-3 text-primary transition-colors duration-300 hover:bg-primary/10"
               >
                 <File />
