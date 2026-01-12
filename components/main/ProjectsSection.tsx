@@ -6,7 +6,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { useState } from "react";
 import { toast } from "sonner";
-import { projects } from "@/projects";
+import { projects } from "@/consts/projects";
 import { SkillIcon } from "../SkillIcon";
 import { Badge, tagVariantMap } from "../ui/badge";
 import { Button } from "../ui/button";
