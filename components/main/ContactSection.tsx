@@ -1,15 +1,7 @@
 "use client";
 
 import { zodResolver } from "@hookform/resolvers/zod";
-import {
-  Instagram,
-  Linkedin,
-  Mail,
-  MapPin,
-  Phone,
-  Send,
-  Twitch,
-} from "lucide-react";
+import { Instagram, Linkedin, Mail, MapPin, Phone, Send } from "lucide-react";
 import Link from "next/link";
 import { useState } from "react";
 import { Controller, useForm } from "react-hook-form";
@@ -25,8 +17,11 @@ const MediaSocials = [
     icon: Linkedin,
     href: "https://www.linkedin.com/in/gabriel-pimentel-zxn111/",
   },
-  { name: "Instagram", icon: Instagram, href: "#" },
-  { name: "Twitch", icon: Twitch, href: "#" },
+  {
+    name: "Instagram",
+    icon: Instagram,
+    href: "https://www.instagram.com/gabb.pimentel/",
+  },
 ];
 
 const dataForm = z.object({
