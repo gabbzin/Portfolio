@@ -1,43 +1,41 @@
 /** biome-ignore-all lint/suspicious/noArrayIndexKey: <Pode usar> */
+"use client";
+
 import { ArrowRight, ExternalLink, Github } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
-
-const projects = [
-  {
-    id: 1,
-    title: "SaaS Landing Page",
-    description: "A beautiful landing page app using React and Tailwind.",
-    image: "/projects/project1.png",
-    tags: ["React", "TailwindCSS", "Supabase"],
-    demoUrl: "#",
-    githubUrl: "#",
-  },
-  {
-    id: 2,
-    title: "Orbit Analytics Dashboard",
-    description:
-      "Interactive analytics dashboard with data visualization and filtering capabilities.",
-    image: "/projects/project2.png",
-    tags: ["TypeScript", "D3.js", "Next.js"],
-    demoUrl: "#",
-    githubUrl: "#",
-  },
-  {
-    id: 3,
-    title: "E-commerce Platform",
-    description:
-      "Full-featured e-commerce platform with user authentication and payment processing.",
-    image: "/projects/project3.png",
-    tags: ["React", "Node.js", "Stripe"],
-    demoUrl: "#",
-    githubUrl: "#",
-  },
-];
+import { useState } from "react";
+import { toast } from "sonner";
+import { projects } from "@/projects";
+import { SkillIcon } from "../SkillIcon";
+import { Badge, tagVariantMap } from "../ui/badge";
+import { Button } from "../ui/button";
+import { Tooltip, TooltipContent, TooltipTrigger } from "../ui/tooltip";
 
 export function ProjectsSection() {
+  const [showIcons, setShowIcons] = useState(false);
+
+  const handleSwitch = () => {
+    setShowIcons(!showIcons);
+
+    if (!showIcons) {
+      toast.info("Alguns icones podem não estar disponíveis.", {
+        duration: 3000,
+      });
+    }
+
+    toast.success("Ícones exibidos com sucesso!");
+  };
+
   return (
     <section id="projects" className="relative px-4 py-24">
+      <Button
+        className="absolute top-4 z-50"
+        variant={"outline"}
+        onClick={handleSwitch}
+      >
+        Mostrar icones
+      </Button>
       <div className="container mx-auto max-w-5xl">
         <h2 className="mb-4 text-center font-bold text-3xl md:text-4xl">
           {" "}
@@ -54,8 +52,14 @@ export function ProjectsSection() {
           {projects.map((project, key) => (
             <div
               key={key}
-              className="group card-hover overflow-hidden rounded-lg bg-card shadow-xs"
+              className="group card-hover relative overflow-hidden rounded-lg bg-card shadow-xs"
             >
+              <Badge
+                variant={project.dev ? "dev" : "success"}
+                className="absolute top-1 right-1 z-1001"
+              >
+                {project.dev ? "Em Desenvolvimento" : "Concluído"}
+              </Badge>
               <div className="h-48 overflow-hidden">
                 <Image
                   src={project.image}
@@ -68,14 +72,21 @@ export function ProjectsSection() {
 
               <div className="p-6">
                 <div className="mb-4 flex flex-wrap gap-2">
-                  {project.tags.map(tag => (
-                    <span
-                      className="rounded-full border bg-secondary px-2 py-1 font-medium text-secondary-foreground text-xs"
-                      key={tag}
-                    >
-                      {tag}
-                    </span>
-                  ))}
+                  {project.tags.map(tag => {
+                    if (showIcons) {
+                      return <SkillIcon icon={tag.toLowerCase()} key={tag} />;
+                    } else {
+                      return (
+                        <Badge
+                          className="rounded-full border bg-secondary px-2 py-1 font-medium text-secondary-foreground text-xs"
+                          key={tag}
+                          variant={tagVariantMap[tag] ?? "default"}
+                        >
+                          {tag}
+                        </Badge>
+                      );
+                    }
+                  })}
                 </div>
 
                 <h3 className="mb-1 font-semibold text-xl"> {project.title}</h3>
@@ -85,18 +96,42 @@ export function ProjectsSection() {
                 <div className="flex items-center justify-between">
                   <div className="flex space-x-3">
                     <Link
-                      href={project.demoUrl}
-                      target="_blank"
+                      href={project.demoUrl || "#"}
+                      target={project.demoUrl ? "_blank" : "_self"}
                       className="text-foreground/80 transition-colors duration-300 hover:text-primary"
                     >
-                      <ExternalLink size={20} />
+                      {project.demoUrl ? (
+                        <ExternalLink size={20} />
+                      ) : (
+                        <Tooltip>
+                          <TooltipTrigger>
+                            <ExternalLink
+                              size={20}
+                              className="pointer-events-none text-red-500"
+                            />
+                          </TooltipTrigger>
+                          <TooltipContent>Sem link externo</TooltipContent>
+                        </Tooltip>
+                      )}
                     </Link>
                     <Link
-                      href={project.githubUrl}
-                      target="_blank"
+                      href={project.githubUrl || "#"}
+                      target={project.githubUrl ? "_blank" : "_self"}
                       className="text-foreground/80 transition-colors duration-300 hover:text-primary"
                     >
-                      <Github size={20} />
+                      {project.githubUrl ? (
+                        <Github size={20} />
+                      ) : (
+                        <Tooltip>
+                          <TooltipTrigger>
+                            <Github
+                              size={20}
+                              className="pointer-events-none text-red-500"
+                            />
+                          </TooltipTrigger>
+                          <TooltipContent>Repositório Privado</TooltipContent>
+                        </Tooltip>
+                      )}
                     </Link>
                   </div>
                 </div>

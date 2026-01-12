@@ -44,7 +44,7 @@ export function ContactSection() {
     control,
     handleSubmit,
     reset,
-    formState: { errors },
+    // formState: { errors },
   } = useForm<dataForm>({
     resolver: zodResolver(dataForm),
     defaultValues: {
