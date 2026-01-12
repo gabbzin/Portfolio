@@ -56,7 +56,7 @@ export function ProjectsSection() {
             >
               <Badge
                 variant={project.dev ? "dev" : "success"}
-                className="absolute top-1 right-1 z-1001"
+                className="absolute top-1 right-1 z-60"
               >
                 {project.dev ? "Em Desenvolvimento" : "Concluído"}
               </Badge>
