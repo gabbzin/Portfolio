@@ -2,7 +2,7 @@
 /** biome-ignore-all lint/performance/noImgElement: <Image do Next não funciona> */
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { skills } from "@/consts/skiils";
 import { cn } from "@/lib/utils";
 import { SkillIcon } from "../SkillIcon";
@@ -16,6 +16,24 @@ export function SkillsSection() {
   const filteredSkills = skills.filter(
     skill => activeCategory === "all" || skill.category === activeCategory,
   );
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add("animate-fade-in");
+        }
+      });
+    });
+
+    const skillElements = document.querySelectorAll(".card-hover");
+    skillElements.forEach(element => {
+      observer.observe(element);
+    });
+
+    observer.disconnect();
+  });
+
   return (
     <section id="skills" className="relative bg-secondary/30 px-4 py-24">
       <div className="container mx-auto max-w-5xl">
