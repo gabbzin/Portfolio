@@ -12,17 +12,27 @@ interface Project {
 export const projects: Project[] = [
   {
     id: 1,
-    title: "Barbearia SaaS",
+    title: "Barbearia Saas SingleTenant",
     description:
-      "SaaS de barbearia com agendamento online e gestão de clientes.",
+      "SaaS de barbearia com agendamento online e gestão de clientes. Versão Single Tenant",
+    image: "/projects/barbearia-saas-st.png",
+    tags: ["React", "TailwindCSS", "Next", "Prisma", "PostgreSQL", "Stripe"],
+    demoUrl: "http://barbearia-saas-st.vercel.app/",
+    githubUrl: null, // Projeto privado
+  },
+  {
+    id: 2,
+    title: "Barbearia SaaS MultiTenant",
+    description:
+      "SaaS de barbearia com agendamento online e gestão de clientes. Versão Multi Tenant",
     image: "/projects/barbearia-saas.png",
     tags: ["React", "TailwindCSS", "Next", "Prisma", "PostgreSQL", "Stripe"],
-    demoUrl: "https://barbearia-system-saas.vercel.app/",
+    demoUrl: null,
     githubUrl: null, // Projeto privado
     dev: true,
   },
   {
-    id: 2,
+    id: 3,
     title: "Oportune",
     description:
       "Plataforma web que conecta alunos, professores e empresas, centralizando a divulgação de oportunidades para quem está no início da carreira.",
@@ -30,9 +40,10 @@ export const projects: Project[] = [
     tags: ["TypeScript", "React", "Next", "PostgreSQL", "Prisma", "Docker"],
     demoUrl: null,
     githubUrl: "https://github.com/PedrFelip/oportune",
+    dev: false,
   },
   {
-    id: 3,
+    id: 4,
     title: "Saúde Pontual",
     description:
       "Sistema web para agendamento de consultas médicas e gerenciamento de pacientes.",
@@ -40,5 +51,6 @@ export const projects: Project[] = [
     tags: ["React", "Nodejs", "Express", "PostgreSQL", "TailwindCSS"],
     demoUrl: null,
     githubUrl: "https://github.com/gabbzin/saude_pontual",
+    dev: false,
   },
 ];
