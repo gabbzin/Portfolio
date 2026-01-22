@@ -7,6 +7,7 @@ import { useState } from "react";
 import { Controller, useForm } from "react-hook-form";
 import { toast } from "sonner";
 import z from "zod";
+import { sendEmailAction } from "@/app/actions/send-email";
 import { cn } from "@/lib/utils";
 import InputAnimation from "../InputAnimation";
 import { Button } from "../ui/button";
@@ -49,13 +50,24 @@ export function ContactSection() {
     },
   });
 
-  const onSubmit = (data: dataForm) => {
+  const onSubmit = async (data: dataForm) => {
     setIsSubmitting(true);
-    console.log(data);
-    toast.success("Mensagem enviada!", {
-      description: "Obrigado por entrar em contato. Responderemos em breve.",
-    });
-    reset();
+
+    const response = await sendEmailAction(data);
+
+    if (response.success) {
+      toast.success("Mensagem enviada!", {
+        description: "Obrigado por entrar em contato. Responderemos em breve.",
+      });
+
+      console.log(response.data);
+      reset();
+    }
+    if (!response.success) {
+      toast.error("Erro ao enviar mensagem.");
+      console.error(response.error);
+    }
+
     setIsSubmitting(false);
   };
   return (
