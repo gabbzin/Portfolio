@@ -1,4 +1,34 @@
-import { Briefcase, Code, File, PointerIcon, User } from "lucide-react";
+import {
+  BriefcaseIcon,
+  CodeIcon,
+  File,
+  FileIcon,
+  type LucideIcon,
+  PointerIcon,
+} from "lucide-react";
+
+interface CardHoverProps {
+  title: string;
+  description: string;
+  icon?: LucideIcon;
+}
+
+const CardHover = ({ title, description, icon: Icon }: CardHoverProps) => {
+  return (
+    <div className="gradient-border card-hover p-6">
+      <div className="flex items-start gap-4">
+        <div className="rounded-full bg-primary/10 p-3">
+          {Icon && <Icon className="h-6 w-6 text-primary" />}
+        </div>
+
+        <div className="text-left">
+          <h4 className="font-semibold text-lg">{title}</h4>
+          <p className="text-muted-foreground">{description}</p>
+        </div>
+      </div>
+    </div>
+  );
+};
 
 export function AboutSection() {
   return (
@@ -52,54 +82,21 @@ export function AboutSection() {
           </div>
 
           <div className="grid grid-cols-1 gap-6">
-            <div className="gradient-border card-hover p-6">
-              <div className="flex items-start gap-4">
-                <div className="rounded-full bg-primary/10 p-3">
-                  <Code className="h-6 w-6 text-primary" />
-                </div>
-                <div className="text-left">
-                  <h4 className="font-semibold text-lg">
-                    {" "}
-                    Desenvolvimento Web
-                  </h4>
-                  <p className="text-muted-foreground">
-                    Criando sites responsivos e aplicações web com frameworks
-                    modernos.
-                  </p>
-                </div>
-              </div>
-            </div>
-            <div className="gradient-border card-hover p-6">
-              <div className="flex items-start gap-4">
-                <div className="rounded-full bg-primary/10 p-3">
-                  <User className="h-6 w-6 text-primary" />
-                </div>
-                <div className="text-left">
-                  <h4 className="font-semibold text-lg">Design de UI/UX</h4>
-                  <p className="text-muted-foreground">
-                    Design de interfaces de usuário intuitivas e experiências
-                    incríveis.
-                  </p>
-                </div>
-              </div>
-            </div>
-            <div className="gradient-border card-hover p-6">
-              <div className="flex items-start gap-4">
-                <div className="rounded-full bg-primary/10 p-3">
-                  <Briefcase className="h-6 w-6 text-primary" />
-                </div>
-
-                <div className="text-left">
-                  <h4 className="font-semibold text-lg">
-                    Desenvolvimento Back end
-                  </h4>
-                  <p className="text-muted-foreground">
-                    Construindo APIs robustas e integrando bancos de dados para
-                    aplicações escaláveis.
-                  </p>
-                </div>
-              </div>
-            </div>
+            <CardHover
+              title="Desenvolvimento Front-end"
+              description="Construindo interfaces de usuário responsivas e interativas com tecnologias modernas."
+              icon={CodeIcon}
+            />
+            <CardHover
+              title="Desenvolvimento com Git/GitHub"
+              description="Gerenciamento de código-fonte e colaboração eficiente em projetos de software."
+              icon={FileIcon}
+            />
+            <CardHover
+              title="Desenvolvimento Back-end"
+              description="Construindo APIs robustas e integrando bancos de dados para aplicações escaláveis."
+              icon={BriefcaseIcon}
+            />
           </div>
         </div>
       </div>
