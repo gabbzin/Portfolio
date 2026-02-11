@@ -3,7 +3,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { skills } from "@/consts/skiils";
+import { skills } from "@/consts/skills";
 import { cn } from "@/lib/utils";
 import { SkillIcon } from "../SkillIcon";
 import { Button } from "../ui/button";
