@@ -12,6 +12,16 @@ interface Project {
 export const projects: Project[] = [
   {
     id: 1,
+    title: "Match Room",
+    description:
+      "Projeto que organiza e gerencia lista de futebol.",
+    image: "/projects/match-room.png",
+    tags: ["React", "TailwindCSS", "Next", "Prisma", "PostgreSQL"],
+    demoUrl: "https://matchroom-beryl.vercel.app/",
+    githubUrl: "https://github.com/gabbzin/matchroom",
+  },
+  {
+    id: 2,
     title: "Barbearia Saas SingleTenant",
     description:
       "SaaS de barbearia com agendamento online e gestão de clientes. Versão Single Tenant",
@@ -21,7 +31,7 @@ export const projects: Project[] = [
     githubUrl: null, // Projeto privado
   },
   {
-    id: 2,
+    id: 3,
     title: "Barbearia SaaS MultiTenant",
     description:
       "SaaS de barbearia com agendamento online e gestão de clientes. Versão Multi Tenant",
@@ -32,7 +42,7 @@ export const projects: Project[] = [
     dev: true,
   },
   {
-    id: 3,
+    id: 4,
     title: "Oportune",
     description:
       "Plataforma web que conecta alunos, professores e empresas, centralizando a divulgação de oportunidades para quem está no início da carreira.",
@@ -43,7 +53,7 @@ export const projects: Project[] = [
     dev: false,
   },
   {
-    id: 4,
+    id: 5,
     title: "Saúde Pontual",
     description:
       "Sistema web para agendamento de consultas médicas e gerenciamento de pacientes.",
