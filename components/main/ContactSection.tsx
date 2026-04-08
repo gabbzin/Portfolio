@@ -110,10 +110,10 @@ export function ContactSection() {
                 <div>
                   <h4 className="font-medium">Telefone</h4>
                   <a
-                    href="tel:+5599985037478"
+                    href="tel:+5561991284291"
                     className="text-muted-foreground transition-colors hover:text-primary"
                   >
-                    +55 (99) 98503-7478
+                    +55 (61) 99128-4291
                   </a>
                 </div>
               </div>
@@ -122,7 +122,7 @@ export function ContactSection() {
                   <MapPin className="h-6 w-6 text-primary" />{" "}
                 </div>
                 <div>
-                  <h4 className="font-medium"> Localização</h4>
+                  <h4 className="font-medium">Localização</h4>
                   <span className="text-muted-foreground transition-colors hover:text-primary">
                     Brasília - DF - Brasil
                   </span>
