@@ -1,7 +1,7 @@
 import Header from "@/components/Header";
 import { AboutSection } from "@/components/main/AboutSection";
 import { ContactSection } from "@/components/main/ContactSection";
-import { HeroSection } from "@/components/main/HeroSection";
+import { HeroSection } from "@/components/HeroSection";
 import { ProjectsSection } from "@/components/main/ProjectsSection";
 import { SkillsSection } from "@/components/main/SkillsSection";
 import { StarBackground } from "@/components/StarBackground";
