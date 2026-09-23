@@ -34,13 +34,13 @@ const data = [
     href: "mailto:user.gabrielp@gmail.com?subject=Ol%C3%A1+Gabriel!",
   },
 ];
-export default function AppleStyleDock() {
+export default function DockCustom() {
   return (
-    <div className="absolute bottom-0 left-1/2 max-w-full -translate-x-1/2">
+    <div className="fixed bottom-0 left-1/2 max-w-full -translate-x-1/2">
       <Dock className="items-end pb-3">
         {data.map((item, idx) => (
           <Link key={idx} href={item.href} target="_blank">
-            <DockItem className="aspect-square rounded-full bg-gray-200 dark:bg-neutral-800">
+            <DockItem className="aspect-square rounded-full bg-background">
               <DockLabel>{item.title}</DockLabel>
               <DockIcon>{item.icon}</DockIcon>
             </DockItem>

@@ -14,9 +14,15 @@ interface Point {
   isText: boolean;
 }
 
-const WORDS = ["Next.js", "Linux", "React", "TypeScript", "Node.js", "FrontEnd"];
-const LERP_FACTOR = 0.07; // Slightly faster snap
-const PARTICLE_COUNT = 3000; // High particle count for "dot-matrix" text clarity
+// Configurações gerais
+const WORDS = [
+  "Node.js",
+  "React.js",
+  "Next.js",
+  "JS / TS",
+];
+const LERP_FACTOR = 0.07;
+const PARTICLE_COUNT = 3000;
 
 export function HeroSection() {
   const canvasRef = useRef<HTMLCanvasElement>(null);
@@ -25,6 +31,7 @@ export function HeroSection() {
   const pointsRef = useRef<Point[]>([]);
   const currentWordIndexRef = useRef(0);
 
+  /* Efeito principal: inicializa canvas, pontos, render loop e listeners */
   useEffect(() => {
     const canvas = canvasRef.current;
     const container = containerRef.current;
@@ -36,6 +43,7 @@ export function HeroSection() {
     let width = container.clientWidth;
     let height = container.clientHeight;
 
+    /* Ajuste de tamanho do canvas e (re)inicialização dos alvos */
     const setCanvasSize = () => {
       width = container.clientWidth;
       height = container.clientHeight;
@@ -45,6 +53,7 @@ export function HeroSection() {
       generateTargetSeeds(WORDS[currentWordIndexRef.current]);
     };
 
+    /* Inicializa partículas com posições e estados randômicos */
     const initPoints = () => {
       pointsRef.current = Array.from({ length: PARTICLE_COUNT }, () => ({
         x: Math.random() * width,
@@ -57,6 +66,7 @@ export function HeroSection() {
       }));
     };
 
+    /* Gera alvos das partículas a partir do texto desenhado em canvas offscreen */
     const generateTargetSeeds = (text: string) => {
       const offscreenCanvas = document.createElement("canvas");
       const offCtx = offscreenCanvas.getContext("2d", {
@@ -70,7 +80,6 @@ export function HeroSection() {
       offCtx.fillStyle = "black";
       offCtx.fillRect(0, 0, width, height);
 
-      // Clean, standard bold font. Not too thick to preserve inner holes (like in 'e', 'a')
       const fontSize = Math.min(width / 5, 200);
       offCtx.font = `bold ${fontSize}px Inter, system-ui, sans-serif`;
       offCtx.textAlign = "center";
@@ -81,7 +90,6 @@ export function HeroSection() {
       const imageData = offCtx.getImageData(0, 0, width, height).data;
       const validPixels: { x: number; y: number }[] = [];
 
-      // Finely scan the text to create a perfect map
       for (let y = 0; y < height; y += 3) {
         for (let x = 0; x < width; x += 3) {
           const index = (y * width + x) * 4;
@@ -91,8 +99,6 @@ export function HeroSection() {
         }
       }
 
-      // We want to form the text using pure points to ensure absolute readability.
-      // No triangle filling which creates jagged blobs.
       const shuffledPixels = validPixels.sort(() => Math.random() - 0.5);
       const textParticleCount = Math.floor(PARTICLE_COUNT * 0.85);
 
@@ -106,7 +112,6 @@ export function HeroSection() {
             isText: true,
           });
         } else {
-          // Background constellation points
           targets.push({
             x: Math.random() * width,
             y: Math.random() * height,
@@ -127,6 +132,7 @@ export function HeroSection() {
       });
     };
 
+    /* Loop de renderização: limpa canvas, atualiza partículas, desenha malha e pontos */
     const render = () => {
       ctx.fillStyle = "#09090b";
       ctx.fillRect(0, 0, width, height);
@@ -137,7 +143,6 @@ export function HeroSection() {
       for (let i = 0; i < points.length; i++) {
         const p = points[i];
 
-        // Background points drift, text points stay locked to the shape
         const driftX = !p.isText ? Math.sin(Date.now() * 0.001 + i) * 0.5 : 0;
         const driftY = !p.isText ? Math.cos(Date.now() * 0.001 + i) * 0.5 : 0;
 
@@ -149,31 +154,24 @@ export function HeroSection() {
         flatPoints[i * 2 + 1] = p.y;
       }
 
-      // 1. Draw Voronoi lines for the "web/mesh" aesthetic
       const delaunay = new Delaunay(flatPoints);
       const voronoi = delaunay.voronoi([0, 0, width, height]);
 
       ctx.beginPath();
       voronoi.render(ctx);
-      // Extremely subtle background mesh
       ctx.strokeStyle = "rgba(255, 255, 255, 0.04)";
       ctx.lineWidth = 1;
       ctx.stroke();
 
-      // 2. Draw the particles themselves.
-      // This is the secret to readability: we don't draw messy polygons,
-      // we draw a dense "dot-matrix" constellation that forms perfect letters.
       for (let i = 0; i < points.length; i++) {
         const p = points[i];
 
         if (p.intensity > 0.05) {
           ctx.beginPath();
-          // The particles form a bright blue text
           ctx.arc(p.x, p.y, 1.5, 0, Math.PI * 2);
-          ctx.fillStyle = `rgba(59, 130, 246, ${p.intensity})`; // Tailwind blue-500
+          ctx.fillStyle = `rgba(59, 130, 246, ${p.intensity})`;
           ctx.fill();
         } else {
-          // Subtle white dots for the background constellation
           ctx.beginPath();
           ctx.arc(p.x, p.y, 0.8, 0, Math.PI * 2);
           ctx.fillStyle = "rgba(255, 255, 255, 0.15)";
@@ -184,6 +182,7 @@ export function HeroSection() {
       animationFrameRef.current = requestAnimationFrame(render);
     };
 
+    /* Rotação de palavras exibidas e geração de novos alvos */
     const wordInterval = setInterval(() => {
       currentWordIndexRef.current =
         (currentWordIndexRef.current + 1) % WORDS.length;
@@ -208,7 +207,7 @@ export function HeroSection() {
       ref={containerRef}
       className="relative flex h-screen min-h-150 w-full items-center overflow-hidden bg-background"
     >
-      {/* Canvas Background */}
+      {/* Seção: Canvas de fundo */}
       <canvas
         ref={canvasRef}
         className="absolute inset-0 block h-full w-full"
@@ -217,7 +216,7 @@ export function HeroSection() {
 
       {/* Content Container */}
       <div className="pointer-events-none relative z-10 mx-auto flex w-full max-w-7xl flex-col items-center justify-between px-6 md:flex-row md:px-12">
-        {/* Left Side: Typography & Summary */}
+        {/* Seção: Conteúdo principal (lado esquerdo) */}
         <motion.div
           className="pointer-events-auto flex w-full flex-col space-y-6 md:w-1/2"
           initial="hidden"
@@ -230,41 +229,14 @@ export function HeroSection() {
             },
           }}
         >
-          {/* <motion.h1
-            className="font-bold text-5xl text-white tracking-tight md:text-7xl"
-            variants={{
-              hidden: { opacity: 0, x: -20 },
-              visible: {
-                opacity: 1,
-                x: 0,
-                transition: { duration: 0.8, ease: "easeOut" },
-              },
-            }}
-          >
-            Gabriel Pimentel
-          </motion.h1>
-
-          <motion.div
-            className="max-w-md text-lg text-zinc-400 leading-relaxed md:text-xl"
-            variants={{
-              hidden: { opacity: 0, x: -20 },
-              visible: {
-                opacity: 1,
-                x: 0,
-                transition: { duration: 0.8, ease: "easeOut" },
-              },
-            }}
-          >
-            <p>Building high-performance Full Stack applications</p>
-            <p>and seamless intelligent automations.</p>
-          </motion.div> */}
+          {/* Espaço reservado para tipografia e resumo (desativado) */}
         </motion.div>
 
-        {/* Right Side */}
+        {/* Seção: Espaço à direita (visível em md+) */}
         <div className="hidden h-full w-1/2 md:block" />
       </div>
 
-      {/* Bottom Navigation / Scroll Indicator */}
+      {/* Seção: Indicador de rolagem inferior */}
       <motion.div
         className="pointer-events-none absolute bottom-8 left-0 flex w-full justify-center"
         initial={{ opacity: 0, y: 10 }}
@@ -272,7 +244,7 @@ export function HeroSection() {
         transition={{ delay: 1, duration: 0.8 }}
       >
         <div className="flex flex-col items-center gap-2 text-sm text-zinc-500">
-          <span>Scroll to explore</span>
+          <span>Scroll</span>
           <div className="relative h-8 w-px overflow-hidden bg-zinc-800">
             <motion.div
               className="absolute top-0 h-1/2 w-full bg-zinc-400"

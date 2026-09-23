@@ -6,6 +6,7 @@ import { ProjectsSection } from "@/components/main/ProjectsSection";
 import { SkillsSection } from "@/components/main/SkillsSection";
 import { StarBackground } from "@/components/StarBackground";
 import { Separator } from "@/components/ui/separator";
+import DockCustom from "@/components/customs/DockCustom";
 
 const mainComponents = [
   HeroSection,
@@ -30,6 +31,7 @@ export default function Home() {
           </section>
         ))}
       </main>
+      <DockCustom />
     </div>
   );
 }
