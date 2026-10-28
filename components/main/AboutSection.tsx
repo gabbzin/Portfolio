@@ -3,7 +3,10 @@ import { Reveal } from "@/components/Reveal";
 import { SectionHeading } from "@/components/SectionHeading";
 
 const facts = [
-  { icon: GraduationCap, text: "Estudante no UNICEPLAC" },
+  {
+    icon: GraduationCap,
+    text: "Engenharia de Software, 6º semestre (UNICEPLAC)",
+  },
   { icon: MapPin, text: "Brasília, Brasil" },
 ];
 
