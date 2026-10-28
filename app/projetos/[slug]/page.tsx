@@ -98,14 +98,22 @@ export default async function ProjectPage({ params }: PageProps) {
         </header>
 
         <div className="relative aspect-video overflow-hidden rounded-xl border bg-code">
-          <Image
-            src={project.image}
-            alt={`Captura de tela do projeto ${project.name}`}
-            fill
-            sizes="(min-width: 768px) 768px, 100vw"
-            className="object-cover"
-            priority
-          />
+          {project.image ? (
+            <Image
+              src={project.image}
+              alt={`Captura de tela do projeto ${project.name}`}
+              fill
+              sizes="(min-width: 768px) 768px, 100vw"
+              className="object-cover"
+              priority
+            />
+          ) : (
+            <div className="flex size-full items-center justify-center bg-linear-to-br from-code to-card p-6">
+              <span className="text-center font-semibold text-4xl text-highlight">
+                {project.name}
+              </span>
+            </div>
+          )}
         </div>
 
         <Block title="// problema">

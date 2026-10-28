@@ -3,7 +3,7 @@ export interface Project {
   name: string;
   description: string;
   tags: string[];
-  image: string;
+  image?: string;
   repo?: string;
   demo?: string;
   status: "concluido" | "em-desenvolvimento";
@@ -77,6 +77,46 @@ export const projects: Project[] = [
         "[PREENCHER] Decisão técnica 2 e por quê.",
       ],
       result: "[PREENCHER] O que foi entregue e o que aprendi.",
+    },
+  },
+  {
+    slug: "alocca-plantoes",
+    name: "Alocca Plantões",
+    description:
+      "Plataforma de gestão de plantões médicos, com candidatura a plantões, controle de presença por geofencing, notificações e fluxo financeiro.",
+    tags: ["NestJS", "Kotlin", "PostgreSQL", "Docker", "SeaweedFS"],
+    status: "em-desenvolvimento",
+    caseStudy: {
+      problem:
+        "Gerenciar plantões médicos em um só lugar: candidatura, presença, notificações e processos financeiros.",
+      decisions: [
+        "Check-in e check-out baseados em localização e geofencing, para validar a presença no local do plantão.",
+        "Backend em NestJS, com os fluxos de candidatura e gerenciamento de plantões definidos antes da implementação.",
+        "Envio de comprovantes financeiros com armazenamento de arquivos no SeaweedFS.",
+      ],
+      result:
+        "Projeto em fase inicial: MVP e estrutura definidos, com o backend como próxima etapa.",
+      contribution:
+        "Participei da definição do MVP, da arquitetura do backend e dos fluxos principais.",
+    },
+  },
+  {
+    slug: "jejum",
+    name: "Jejum+",
+    description:
+      "Aplicativo mobile de acompanhamento de jejum intermitente, com timer, janela de alimentação e histórico de sessões.",
+    tags: ["Flutter", "Provider", "ChangeNotifier", "Hive"],
+    repo: "https://github.com/gabbzin/jejum_app",
+    status: "concluido",
+    caseStudy: {
+      problem:
+        "Teste técnico de um processo seletivo: um app para acompanhar o jejum intermitente.",
+      decisions: [
+        "Estado gerenciado com Provider e ChangeNotifier, separando a lógica nos controllers.",
+        "Persistência local com Hive, para manter o histórico sem depender de servidor.",
+      ],
+      result:
+        "App com timer e indicador de progresso circular, protocolos, refeições, login e histórico de sessões.",
     },
   },
 ];

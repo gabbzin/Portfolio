@@ -39,13 +39,21 @@ export function ProjectsSection() {
               className="flex flex-col overflow-hidden rounded-xl border bg-card"
             >
               <div className="relative aspect-video overflow-hidden bg-code">
-                <Image
-                  src={project.image}
-                  alt={`Captura de tela do projeto ${project.name}`}
-                  fill
-                  sizes="(min-width: 1024px) 33vw, (min-width: 768px) 50vw, 100vw"
-                  className="object-cover"
-                />
+                {project.image ? (
+                  <Image
+                    src={project.image}
+                    alt={`Captura de tela do projeto ${project.name}`}
+                    fill
+                    sizes="(min-width: 1024px) 33vw, (min-width: 768px) 50vw, 100vw"
+                    className="object-cover"
+                  />
+                ) : (
+                  <div className="flex size-full items-center justify-center bg-linear-to-br from-code to-card p-6">
+                    <span className="text-center font-semibold text-2xl text-highlight">
+                      {project.name}
+                    </span>
+                  </div>
+                )}
                 <Badge
                   variant={project.status === "concluido" ? "success" : "dev"}
                   className="absolute top-3 right-3 backdrop-blur"
