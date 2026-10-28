@@ -3,7 +3,7 @@ import { Reveal } from "@/components/Reveal";
 import { SectionHeading } from "@/components/SectionHeading";
 
 const facts = [
-  { icon: GraduationCap, text: "Estudante de Engenharia de Software" },
+  { icon: GraduationCap, text: "Estudante no UNICEPLAC" },
   { icon: MapPin, text: "Brasília, Brasil" },
 ];
 
@@ -16,16 +16,20 @@ export function AboutSection() {
         <div className="grid items-start gap-12 md:grid-cols-2">
           <Reveal className="space-y-4 text-muted-foreground">
             <p>
-              Construo aplicações web completas, do banco de dados à interface,
-              com foco em código limpo e bem estruturado.
+              Engenheiro de software full stack, focado em resolver problemas
+              reais com software. Trabalho do front-end e do desenho de APIs à
+              modelagem de banco, processamento assíncrono e infraestrutura.
             </p>
             <p>
-              Gosto de entender como cada camada funciona e de resolver
-              problemas com soluções simples e escaláveis.
+              No estágio, desenvolvo soluções que automatizam rotinas contábeis,
+              como download de notas fiscais, processamento de dados fiscais e
+              geração de relatórios, hoje reunidas em uma plataforma interna com
+              Next.js, NestJS, PostgreSQL, Redis, BullMQ e Docker.
             </p>
             <p>
-              Trabalho principalmente com TypeScript, React, Next.js e NestJS, e
-              sigo aprendendo a cada projeto.
+              Fora do trabalho, construo produtos que vão de SaaS a sistemas de
+              saúde. Me interesso por arquitetura de software, backend e
+              sistemas fáceis de manter, com responsabilidades bem separadas.
             </p>
           </Reveal>
 
