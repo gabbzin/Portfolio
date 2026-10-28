@@ -17,34 +17,10 @@ const badgeVariants = cva(
           "border-transparent bg-destructive text-white [a&]:hover:bg-destructive/90 focus-visible:ring-destructive/20 dark:focus-visible:ring-destructive/40 dark:bg-destructive/60",
         outline:
           "text-foreground [a&]:hover:bg-accent [a&]:hover:text-accent-foreground",
-        dev: "border-transparent bg-yellow-500/10 text-yellow-700 [a&]:hover:bg-yellow-600",
+        dev: "border-transparent bg-yellow-500/15 text-yellow-800 dark:text-yellow-300",
         success:
-          "border-transparent bg-green-500/10 text-green-800 [a&]:hover:bg-green-600",
-        // Frontend
-        react:
-          "border-transparent bg-sky-500/10 text-sky-800 [a&]:hover:bg-sky-600/20",
-        next: "border-transparent bg-neutral-900/10 text-neutral-800 [a&]:hover:bg-neutral-900/20",
-        tailwind:
-          "border-transparent bg-cyan-500/10 text-cyan-800 [a&]:hover:bg-cyan-600/20",
-        typescript:
-          "border-transparent bg-blue-600/10 text-blue-800 [a&]:hover:bg-blue-700/20",
-
-        // Backend
-        node: "border-transparent bg-green-600/10 text-green-800 [a&]:hover:bg-green-700/20",
-        express:
-          "border-transparent bg-zinc-600/10 text-zinc-800 [a&]:hover:bg-zinc-700/20",
-
-        // Database / ORM
-        postgres:
-          "border-transparent bg-indigo-600/10 text-indigo-800 [a&]:hover:bg-indigo-700/20",
-        prisma:
-          "border-transparent bg-violet-600/10 text-violet-800 [a&]:hover:bg-violet-700/20",
-
-        // Infra / Payments
-        docker:
-          "border-transparent bg-sky-700/10 text-sky-900 [a&]:hover:bg-sky-800/20",
-        stripe:
-          "border-transparent bg-purple-600/10 text-purple-800 [a&]:hover:bg-purple-700/20",
+          "border-transparent bg-green-500/15 text-green-800 dark:text-green-300",
+        tech: "border-border bg-code px-2.5 py-1 font-mono text-foreground/90",
       },
     },
     defaultVariants: {
@@ -52,22 +28,6 @@ const badgeVariants = cva(
     },
   },
 );
-
-export type BadgeVariant = VariantProps<typeof badgeVariants>["variant"];
-
-export const tagVariantMap: Record<string, BadgeVariant> = {
-  React: "react",
-  Next: "next",
-  "Next.js": "next",
-  TailwindCSS: "tailwind",
-  TypeScript: "typescript",
-  "Node.js": "node",
-  Express: "express",
-  PostgreSQL: "postgres",
-  Prisma: "prisma",
-  Docker: "docker",
-  Stripe: "stripe",
-};
 
 function Badge({
   className,
