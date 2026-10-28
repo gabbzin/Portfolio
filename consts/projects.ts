@@ -1,67 +1,81 @@
-interface Project {
-  id: number;
-  title: string;
+export interface Project {
+  slug: string;
+  name: string;
   description: string;
-  image: string;
   tags: string[];
-  demoUrl: string | null;
-  githubUrl: string | null;
-  dev?: boolean;
+  image: string;
+  repo?: string;
+  demo?: string;
+  status: "concluido" | "em-desenvolvimento";
+  caseStudy: {
+    problem: string;
+    decisions: string[];
+    result: string;
+    contribution?: string;
+  };
 }
 
 export const projects: Project[] = [
   {
-    id: 1,
-    title: "Match Room",
+    slug: "barbearia-saas",
+    name: "Barbearia SaaS",
     description:
-      "Projeto que organiza e gerencia lista de futebol.",
-    image: "/projects/match-room.png",
-    tags: ["React", "TailwindCSS", "Next", "Prisma", "PostgreSQL"],
-    demoUrl: "https://matchroom-beryl.vercel.app/",
-    githubUrl: "https://github.com/gabbzin/matchroom",
-  },
-  {
-    id: 2,
-    title: "Barbearia Saas SingleTenant",
-    description:
-      "SaaS de barbearia com agendamento online e gestão de clientes. Versão Single Tenant",
-    image: "/projects/barbearia-saas-st.png",
-    tags: ["React", "TailwindCSS", "Next", "Prisma", "PostgreSQL", "Stripe"],
-    // "http://barbearia-saas-st.vercel.app/"
-    demoUrl: null, // Tá sendo testado em produção, manter site privado.
-    githubUrl: null, // Projeto privado
-  },
-  {
-    id: 3,
-    title: "Barbearia SaaS MultiTenant",
-    description:
-      "SaaS de barbearia com agendamento online e gestão de clientes. Versão Multi Tenant",
+      "SaaS de barbearia com agendamento online e gestão de clientes.",
+    tags: [
+      "React",
+      "Next.js",
+      "Tailwind CSS",
+      "Prisma",
+      "PostgreSQL",
+      "Stripe",
+    ],
     image: "/projects/barbearia-saas.png",
-    tags: ["React", "TailwindCSS", "Next", "Prisma", "PostgreSQL", "Stripe"],
-    demoUrl: null,
-    githubUrl: null, // Projeto privado
-    dev: true,
+    status: "em-desenvolvimento",
+    caseStudy: {
+      problem: "[PREENCHER] Qual problema o projeto resolve e para quem.",
+      decisions: [
+        "[PREENCHER] Decisão técnica 1 e por quê.",
+        "[PREENCHER] Decisão técnica 2 e por quê.",
+      ],
+      result: "[PREENCHER] O que foi entregue e o que aprendi.",
+    },
   },
   {
-    id: 4,
-    title: "Oportune",
+    slug: "oportune",
+    name: "Oportune",
     description:
-      "Plataforma web que conecta alunos, professores e empresas, centralizando a divulgação de oportunidades para quem está no início da carreira.",
+      "Plataforma que conecta alunos, professores e empresas, centralizando oportunidades para quem está no início da carreira.",
+    tags: ["TypeScript", "React", "Next.js", "PostgreSQL", "Prisma", "Docker"],
     image: "/projects/oportune.png",
-    tags: ["TypeScript", "React", "Next", "PostgreSQL", "Prisma", "Docker"],
-    demoUrl: null,
-    githubUrl: "https://github.com/PedrFelip/oportune",
-    dev: false,
+    repo: "https://github.com/PedrFelip/oportune",
+    status: "concluido",
+    caseStudy: {
+      problem: "[PREENCHER] Qual problema o projeto resolve e para quem.",
+      decisions: [
+        "[PREENCHER] Decisão técnica 1 e por quê.",
+        "[PREENCHER] Decisão técnica 2 e por quê.",
+      ],
+      result: "[PREENCHER] O que foi entregue e o que aprendi.",
+      contribution:
+        "[PREENCHER] Projeto em equipe (repositório de Pedro). Descreva aqui a sua parte.",
+    },
   },
   {
-    id: 5,
-    title: "Saúde Pontual",
-    description:
-      "Sistema web para agendamento de consultas médicas e gerenciamento de pacientes.",
-    image: "/projects/saudepontual.png",
-    tags: ["React", "Nodejs", "Express", "PostgreSQL", "TailwindCSS"],
-    demoUrl: null,
-    githubUrl: "https://github.com/gabbzin/saude_pontual",
-    dev: false,
+    slug: "match-room",
+    name: "Match Room",
+    description: "Organiza e gerencia listas de futebol entre amigos.",
+    tags: ["React", "Next.js", "Tailwind CSS", "Prisma", "PostgreSQL"],
+    image: "/projects/match-room.png",
+    repo: "https://github.com/gabbzin/matchroom",
+    demo: "https://matchroom-beryl.vercel.app/",
+    status: "concluido",
+    caseStudy: {
+      problem: "[PREENCHER] Qual problema o projeto resolve e para quem.",
+      decisions: [
+        "[PREENCHER] Decisão técnica 1 e por quê.",
+        "[PREENCHER] Decisão técnica 2 e por quê.",
+      ],
+      result: "[PREENCHER] O que foi entregue e o que aprendi.",
+    },
   },
 ];
