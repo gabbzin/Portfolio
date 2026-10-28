@@ -2,7 +2,6 @@
 
 Landing page pessoal de Gabriel Pimentel, desenvolvedor Full-Stack em Brasília. Apresenta projetos (com estudo de caso), stack, sobre e um formulário de contato que envia e-mail.
 
-<!-- TODO: adicionar screenshot em docs/screenshot.png e referenciar aqui -->
 
 ## Stack
 
