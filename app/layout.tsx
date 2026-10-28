@@ -1,26 +1,34 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono, Inter } from "next/font/google";
+import { Inter, JetBrains_Mono } from "next/font/google";
 import "./globals.css";
 import { Toaster } from "sonner";
-
-const geistSans = Geist({
-  variable: "--font-geist-sans",
-  subsets: ["latin"],
-});
-
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
-});
+import Footer from "@/components/Footer";
+import Header from "@/components/Header";
+import { ThemeProvider } from "@/components/ThemeProvider";
 
 const inter = Inter({
   variable: "--font-inter",
   subsets: ["latin"],
 });
 
+const jetbrainsMono = JetBrains_Mono({
+  variable: "--font-jetbrains-mono",
+  subsets: ["latin"],
+});
+
+const description =
+  "Desenvolvedor Full-Stack em Brasília. Construo aplicações web completas com React, Next.js, NestJS, Prisma e PostgreSQL.";
+
 export const metadata: Metadata = {
-  title: "Portfólio Gabriel",
-  description: "Portfólio pessoal de Gabriel Pimentel",
+  title: "Gabriel Pimentel | Desenvolvedor Full-Stack",
+  description,
+  openGraph: {
+    title: "Gabriel Pimentel | Desenvolvedor Full-Stack",
+    description,
+    type: "website",
+    locale: "pt_BR",
+    siteName: "Gabriel Pimentel",
+  },
 };
 
 export default function RootLayout({
@@ -29,12 +37,20 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="pt-BR">
+    <html lang="pt-BR" suppressHydrationWarning>
       <body
-        className={`${geistSans.variable} ${geistMono.variable} ${inter.variable} antialiased`}
+        className={`${inter.variable} ${jetbrainsMono.variable} overflow-x-hidden antialiased`}
       >
-        <Toaster visibleToasts={2} expand />
-        {children}
+        <ThemeProvider
+          attribute="class"
+          defaultTheme="dark"
+          disableTransitionOnChange
+        >
+          <Toaster visibleToasts={2} expand />
+          <Header />
+          {children}
+          <Footer />
+        </ThemeProvider>
       </body>
     </html>
   );

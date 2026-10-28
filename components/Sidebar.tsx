@@ -1,27 +1,21 @@
-import { Folder, Home, Mail, MenuIcon, Settings, User } from "lucide-react";
+import { MenuIcon } from "lucide-react";
 import Link from "next/link";
+import { navItems } from "@/consts/nav";
 import { Button } from "./ui/button";
 import {
   Sheet,
+  SheetClose,
   SheetContent,
   SheetHeader,
   SheetTitle,
   SheetTrigger,
 } from "./ui/sheet";
 
-const navItems = [
-  { name: "Home", href: "#hero", icon: Home },
-  { name: "About", href: "#about", icon: User },
-  { name: "Skills", href: "#skills", icon: Settings },
-  { name: "Projects", href: "#projects", icon: Folder },
-  { name: "Contact", href: "#contact", icon: Mail },
-];
-
 export function Sidebar() {
   return (
     <Sheet>
       <SheetTrigger asChild>
-        <Button variant="outline" className="">
+        <Button variant="outline" size="icon" aria-label="Abrir menu">
           <MenuIcon />
         </Button>
       </SheetTrigger>
@@ -36,16 +30,15 @@ export function Sidebar() {
         </SheetHeader>
         <div>
           {navItems.map(item => (
-            <Link
-              key={item.name}
-              href={item.href}
-              className="block rounded-md px-3 py-2 font-medium text-base text-foreground hover:bg-primary hover:text-primary-foreground"
-            >
-              <div className="flex items-center gap-2">
+            <SheetClose asChild key={item.name}>
+              <Link
+                href={item.href}
+                className="flex min-h-11 items-center gap-2 rounded-md px-3 py-2 font-medium text-base text-foreground hover:bg-primary hover:text-primary-foreground"
+              >
                 <item.icon className="size-4" />
                 {item.name}
-              </div>
-            </Link>
+              </Link>
+            </SheetClose>
           ))}
         </div>
       </SheetContent>
