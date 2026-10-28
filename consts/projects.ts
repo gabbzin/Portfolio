@@ -33,12 +33,16 @@ export const projects: Project[] = [
     image: "/projects/axon.png",
     status: "em-desenvolvimento",
     caseStudy: {
-      problem: "[PREENCHER] Qual problema o projeto resolve e para quem.",
+      problem:
+        "Barbearias com vários profissionais costumam controlar agenda e atendimentos de forma manual e descentralizada. O Axon unifica isso para administrador, barbeiro e cliente, com foco em uso pelo celular.",
       decisions: [
-        "[PREENCHER] Decisão técnica 1 e por quê.",
-        "[PREENCHER] Decisão técnica 2 e por quê.",
+        "Backend em NestJS com isolamento de dados por barbearia: um guard resolve o tenant e um contexto assíncrono injeta o tenantId nos repositórios.",
+        "Módulos de agendamento e avaliação organizados com DDD (commands, queries e domínio separados), por concentrarem as regras de negócio mais complexas.",
+        "Agenda baseada em disponibilidade semanal, pausas recorrentes e bloqueios de exceção, com o tamanho do slot definido pela duração do serviço.",
+        "Nova versão com arquitetura mais estruturada que a legada, que segue em produção, com frontend em TanStack Start e Query.",
       ],
-      result: "[PREENCHER] O que foi entregue e o que aprendi.",
+      result:
+        "API de agendamentos, barbeiros, serviços, avaliações e dashboard pronta, e frontend com agendamento em etapas, histórico e painéis por perfil. A versão legada está em produção e a nova está sendo preparada para implantação. Assinaturas com Stripe ficaram fora do MVP.",
     },
   },
   {
@@ -51,12 +55,16 @@ export const projects: Project[] = [
     repo: "https://github.com/PedrFelip/oportune",
     status: "concluido",
     caseStudy: {
-      problem: "[PREENCHER] Qual problema o projeto resolve e para quem.",
+      problem:
+        "O dilema do primeiro emprego: o aluno precisa de experiência para ser contratado, mas só ganha experiência sendo contratado. Estágios e projetos acadêmicos ficam espalhados e difíceis de encontrar.",
       decisions: [
-        "[PREENCHER] Decisão técnica 1 e por quê.",
-        "[PREENCHER] Decisão técnica 2 e por quê.",
+        "Três perfis de usuário (aluno, empresa e professor), cada um com cadastro e perfil próprios.",
+        "Candidatura em um clique, reaproveitando os dados do perfil do aluno.",
+        "Notificações por email no cadastro e a cada mudança de status da candidatura.",
+        "Busca avançada de vagas com filtros por área, semestre e carga horária.",
       ],
-      result: "[PREENCHER] O que foi entregue e o que aprendi.",
+      result:
+        "Plataforma web que reúne vagas de empresas e professores e candidaturas de alunos em um só lugar, desenvolvida como projeto integrador da faculdade em 2025.",
       contribution:
         "[PREENCHER] Projeto em equipe (repositório de Pedro). Descreva aqui a sua parte.",
     },
@@ -71,12 +79,15 @@ export const projects: Project[] = [
     demo: "https://matchroom-beryl.vercel.app/",
     status: "concluido",
     caseStudy: {
-      problem: "[PREENCHER] Qual problema o projeto resolve e para quem.",
+      problem:
+        "Organizar o racha de futebol entre amigos: sortear os times, decidir quem fica no banco e acompanhar quem ganhou, sem planilha nem grupo de mensagens.",
       decisions: [
-        "[PREENCHER] Decisão técnica 1 e por quê.",
-        "[PREENCHER] Decisão técnica 2 e por quê.",
+        "Sistema de salas compartilhadas por URL, onde vários usuários acompanham a partida ao mesmo tempo e só o dono da sala edita, validado por um token de dono.",
+        "Rotação automática: quem perde vai para o banco e o banco entra contra o vencedor, mantendo a partida contínua.",
+        "Uma única tabela Room no PostgreSQL, com jogadores, times e histórico em campos JSON, pela flexibilidade de um modelo em evolução.",
       ],
-      result: "[PREENCHER] O que foi entregue e o que aprendi.",
+      result:
+        "App no ar com criação e compartilhamento de salas, sorteio de times, partidas contínuas e histórico com data e hora, persistido em banco.",
     },
   },
   {
