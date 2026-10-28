@@ -1,155 +1,111 @@
-/** biome-ignore-all lint/suspicious/noArrayIndexKey: <Pode usar> */
 "use client";
 
+import { motion, useReducedMotion } from "framer-motion";
 import { ArrowRight, ExternalLink, Github } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
-import { useState } from "react";
-import { toast } from "sonner";
+import { SectionHeading } from "@/components/SectionHeading";
+import { Badge } from "@/components/ui/badge";
 import { projects } from "@/consts/projects";
-import { SkillIcon } from "../SkillIcon";
-import { Badge, tagVariantMap } from "../ui/badge";
-import { Button } from "../ui/button";
-import { Tooltip, TooltipContent, TooltipTrigger } from "../ui/tooltip";
+import { fadeUp, stagger } from "@/lib/motion";
+
+const linkClass =
+  "inline-flex min-h-11 items-center gap-1.5 text-muted-foreground text-sm transition-colors hover:text-foreground";
 
 export function ProjectsSection() {
-  const [showIcons, setShowIcons] = useState(false);
-
-  const handleSwitch = () => {
-    setShowIcons(!showIcons);
-
-    if (!showIcons) {
-      toast.info("Alguns icones podem não estar disponíveis.", {
-        duration: 3000,
-      });
-    }
-
-    toast.success("Ícones exibidos com sucesso!");
-  };
+  const reduceMotion = useReducedMotion();
 
   return (
-    <section id="projects" className="relative px-4 py-24">
-      <Button
-        className="absolute top-4 z-50"
-        variant={"outline"}
-        onClick={handleSwitch}
-      >
-        Mostrar icones
-      </Button>
-      <div className="container mx-auto max-w-5xl">
-        <h2 className="mb-4 text-center font-bold text-3xl md:text-4xl">
-          {" "}
-          <span className="text-primary"> Projetos </span> Realizados
-        </h2>
+    <section id="projetos" className="bg-surface py-24">
+      <div className="container">
+        <SectionHeading
+          label="// projetos"
+          title="Projetos em destaque"
+          description="Aplicações completas que construí, do banco de dados à interface."
+        />
 
-        <p className="mx-auto mb-12 max-w-2xl text-center text-muted-foreground">
-          Aqui estão alguns dos meus projetos recentes. Cada projeto foi
-          cuidadosamente elaborado com atenção aos detalhes, desempenho e
-          experiência do usuário.
-        </p>
-
-        <div className="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3">
-          {projects.map((project, key) => (
-            <div
-              key={key}
-              className="group card-hover relative overflow-hidden rounded-lg bg-card shadow-xs"
+        <motion.div
+          className="grid gap-6 md:grid-cols-2 lg:grid-cols-3"
+          variants={stagger}
+          initial={reduceMotion ? "visible" : "hidden"}
+          whileInView="visible"
+          viewport={{ once: true, margin: "-80px" }}
+        >
+          {projects.map(project => (
+            <motion.article
+              key={project.slug}
+              variants={fadeUp}
+              whileHover={reduceMotion ? undefined : { y: -4 }}
+              className="flex flex-col overflow-hidden rounded-xl border bg-card"
             >
-              <Badge
-                variant={project.dev ? "dev" : "success"}
-                className="absolute top-1 right-1 z-60"
-              >
-                {project.dev ? "Em Desenvolvimento" : "Concluído"}
-              </Badge>
-              <div className="h-48 overflow-hidden">
+              <div className="relative aspect-video overflow-hidden bg-code">
                 <Image
                   src={project.image}
-                  alt={project.title}
-                  className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-110"
-                  width={400}
-                  height={192}
+                  alt={`Captura de tela do projeto ${project.name}`}
+                  fill
+                  sizes="(min-width: 1024px) 33vw, (min-width: 768px) 50vw, 100vw"
+                  className="object-cover"
                 />
+                <Badge
+                  variant={project.status === "concluido" ? "success" : "dev"}
+                  className="absolute top-3 right-3 backdrop-blur"
+                >
+                  {project.status === "concluido"
+                    ? "Concluído"
+                    : "Em desenvolvimento"}
+                </Badge>
               </div>
 
-              <div className="p-6">
-                <div className="mb-4 flex flex-wrap gap-2">
-                  {project.tags.map(tag => {
-                    if (showIcons) {
-                      return <SkillIcon icon={tag.toLowerCase()} key={tag} />;
-                    } else {
-                      return (
-                        <Badge
-                          className="rounded-full border bg-secondary px-2 py-1 font-medium text-secondary-foreground text-xs"
-                          key={tag}
-                          variant={tagVariantMap[tag] ?? "default"}
-                        >
-                          {tag}
-                        </Badge>
-                      );
-                    }
-                  })}
-                </div>
-
-                <h3 className="mb-1 font-semibold text-xl"> {project.title}</h3>
-                <p className="mb-4 text-muted-foreground text-sm">
+              <div className="flex flex-1 flex-col p-6">
+                <h3 className="font-semibold text-xl">{project.name}</h3>
+                <p className="mt-2 text-muted-foreground text-sm">
                   {project.description}
                 </p>
-                <div className="flex items-center justify-between">
-                  <div className="flex space-x-3">
-                    <Link
-                      href={project.demoUrl || "#"}
-                      target={project.demoUrl ? "_blank" : "_self"}
-                      className="text-foreground/80 transition-colors duration-300 hover:text-primary"
+
+                <ul className="mt-4 flex flex-wrap gap-2">
+                  {project.tags.map(tag => (
+                    <li key={tag}>
+                      <Badge variant="tech">{tag}</Badge>
+                    </li>
+                  ))}
+                </ul>
+
+                <div className="mt-auto flex flex-wrap items-center gap-x-5 pt-4">
+                  <Link
+                    href={`/projetos/${project.slug}`}
+                    className="inline-flex min-h-11 items-center gap-1.5 font-medium text-highlight text-sm hover:underline"
+                  >
+                    Ver estudo de caso <ArrowRight size={16} />
+                  </Link>
+                  {project.repo ? (
+                    <a
+                      href={project.repo}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className={linkClass}
                     >
-                      {project.demoUrl ? (
-                        <ExternalLink size={20} />
-                      ) : (
-                        <Tooltip>
-                          <TooltipTrigger>
-                            <ExternalLink
-                              size={20}
-                              className="pointer-events-none text-red-500"
-                            />
-                          </TooltipTrigger>
-                          <TooltipContent>Sem link externo</TooltipContent>
-                        </Tooltip>
-                      )}
-                    </Link>
-                    <Link
-                      href={project.githubUrl || "#"}
-                      target={project.githubUrl ? "_blank" : "_self"}
-                      className="text-foreground/80 transition-colors duration-300 hover:text-primary"
+                      <Github size={16} /> GitHub
+                    </a>
+                  ) : (
+                    <span className="inline-flex min-h-11 items-center text-sm text-subtle">
+                      Código privado
+                    </span>
+                  )}
+                  {project.demo && (
+                    <a
+                      href={project.demo}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className={linkClass}
                     >
-                      {project.githubUrl ? (
-                        <Github size={20} />
-                      ) : (
-                        <Tooltip>
-                          <TooltipTrigger>
-                            <Github
-                              size={20}
-                              className="pointer-events-none text-red-500"
-                            />
-                          </TooltipTrigger>
-                          <TooltipContent>Repositório Privado</TooltipContent>
-                        </Tooltip>
-                      )}
-                    </Link>
-                  </div>
+                      <ExternalLink size={16} /> Demo
+                    </a>
+                  )}
                 </div>
               </div>
-            </div>
+            </motion.article>
           ))}
-        </div>
-
-        <div className="mt-12 text-center">
-          <Link
-            className="cosmic-button mx-auto flex w-fit items-center gap-2"
-            target="_blank"
-            href="https://github.com/gabbzin"
-            rel="noopener"
-          >
-            Confira no GitHub <ArrowRight size={16} />
-          </Link>
-        </div>
+        </motion.div>
       </div>
     </section>
   );
