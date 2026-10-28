@@ -17,19 +17,20 @@ export interface Project {
 
 export const projects: Project[] = [
   {
-    slug: "barbearia-saas",
-    name: "Barbearia SaaS",
+    slug: "axon",
+    name: "Axon",
     description:
-      "SaaS de barbearia com agendamento online e gestão de clientes.",
+      "SaaS multi-tenant de agendamento e gestão para barbearias, com painéis para administrador, barbeiro e cliente.",
     tags: [
+      "TanStack Start",
       "React",
-      "Next.js",
-      "Tailwind CSS",
+      "NestJS",
       "Prisma",
       "PostgreSQL",
       "Stripe",
+      "Docker",
     ],
-    image: "/projects/barbearia-saas.png",
+    image: "/projects/axon.png",
     status: "em-desenvolvimento",
     caseStudy: {
       problem: "[PREENCHER] Qual problema o projeto resolve e para quem.",
