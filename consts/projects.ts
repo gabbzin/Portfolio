@@ -66,7 +66,7 @@ export const projects: Project[] = [
       result:
         "Plataforma web que reúne vagas de empresas e professores e candidaturas de alunos em um só lugar, desenvolvida como projeto integrador da faculdade em 2025.",
       contribution:
-        "[PREENCHER] Projeto em equipe (repositório de Pedro). Descreva aqui a sua parte.",
+        "Projeto em equipe (repositório de Pedro). Fiquei responsável pelo frontend da aplicação.",
     },
   },
   {
