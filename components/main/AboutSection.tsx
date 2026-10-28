@@ -9,7 +9,7 @@ const facts = [
 
 export function AboutSection() {
   return (
-    <section id="sobre" className="bg-surface py-24">
+    <section id="sobre" className="bg-background py-24">
       <div className="container">
         <SectionHeading label="// sobre" title="Sobre mim" />
 

@@ -67,7 +67,7 @@ export function ContactSection() {
     setIsSubmitting(false);
   };
   return (
-    <section id="contato" className="bg-background py-24">
+    <section id="contato" className="bg-surface py-24">
       <div className="container">
         <SectionHeading
           label="// contato"

@@ -1,4 +1,11 @@
-import { Folder, Layers, type LucideIcon, Mail, User } from "lucide-react";
+import {
+  Briefcase,
+  Folder,
+  Layers,
+  type LucideIcon,
+  Mail,
+  User,
+} from "lucide-react";
 
 interface NavItem {
   name: string;
@@ -8,6 +15,7 @@ interface NavItem {
 
 export const navItems: NavItem[] = [
   { name: "Projetos", href: "/#projetos", icon: Folder },
+  { name: "Experiência", href: "/#experiencia", icon: Briefcase },
   { name: "Stack", href: "/#stack", icon: Layers },
   { name: "Sobre", href: "/#sobre", icon: User },
   { name: "Contato", href: "/#contato", icon: Mail },
