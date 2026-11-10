@@ -35,7 +35,7 @@ Abra [http://localhost:3000](http://localhost:3000).
 
 Uma cena 3D fica fixa atrás do conteúdo e o scroll é a única fonte de progresso. A página tem três trechos: a partida (hero), a viagem (scroll fixado em atos, cada um com seus passos) e a chegada (contato). Cada trecho escreve seu progresso em `lib/journey-store.ts`; o diretor da cena lê esse valor a cada quadro, percorre a trilha de poses (`scene/poses.ts`) e todos os elementos (globo, rota, marcadores, porto) leem a pose corrente.
 
-Há uma versão estática com o mesmo conteúdo em seções normais, usada no servidor, sem JavaScript, com `prefers-reduced-motion`, em aparelho fraco e sem WebGL acelerado. Para forçar: `?modo=3d` ou `?modo=estatico`.
+Há uma versão estática com o mesmo conteúdo em seções normais, usada no servidor, sem JavaScript, com `prefers-reduced-motion`, em aparelho fraco e sem WebGL acelerado. Para forçar: `?modo=3d` ou `?modo=estatico`. O botão "Modo recrutador" do cabeçalho liga essa mesma versão e guarda a escolha no navegador.
 
 ## Estrutura
 

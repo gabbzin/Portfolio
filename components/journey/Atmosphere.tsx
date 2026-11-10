@@ -25,10 +25,33 @@ class Boundary extends Component<
   }
 }
 
+const IDLE_MS = 12_000;
+
 /** O canvas fixo da cena, atrás de todo o conteúdo. */
 export default function Atmosphere() {
   const { compact, goStatic } = useJourney();
   const [ready, setReady] = useState(false);
+  // Sem scroll, cursor ou teclado por um tempo, o render para: a cena fica
+  // congelada no último quadro e a bateria agradece.
+  const [awake, setAwake] = useState(true);
+
+  useEffect(() => {
+    let timer = 0;
+    const wake = () => {
+      setAwake(true);
+      window.clearTimeout(timer);
+      timer = window.setTimeout(() => setAwake(false), IDLE_MS);
+    };
+    const events = ["scroll", "pointermove", "keydown", "touchstart"] as const;
+
+    wake();
+    for (const event of events)
+      window.addEventListener(event, wake, { passive: true });
+    return () => {
+      window.clearTimeout(timer);
+      for (const event of events) window.removeEventListener(event, wake);
+    };
+  }, []);
 
   useEffect(() => {
     // O canvas tem pointer-events: none, então o cursor vem da janela.
@@ -57,6 +80,7 @@ export default function Atmosphere() {
       <Boundary onError={goStatic}>
         <Scene
           compact={compact}
+          active={awake}
           onReady={() => setReady(true)}
           onContextLost={goStatic}
         />

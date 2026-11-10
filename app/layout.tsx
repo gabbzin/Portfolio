@@ -5,6 +5,8 @@ import { Toaster } from "sonner";
 import Footer from "@/components/Footer";
 import Header from "@/components/Header";
 import { ThemeProvider } from "@/components/ThemeProvider";
+import { languages, stackLayers } from "@/consts/skills";
+import { email, github, instagram, linkedin } from "@/consts/socials";
 
 const inter = Inter({
   variable: "--font-inter",
@@ -24,16 +26,42 @@ const bricolage = Bricolage_Grotesque({
 const description =
   "Desenvolvedor Full-Stack em Brasília. Construo aplicações web completas com React, Next.js, NestJS, Prisma e PostgreSQL.";
 
+const siteUrl = "https://gabriel-pimentel-portfolio.vercel.app";
+const title = "Gabriel Pimentel | Desenvolvedor Full-Stack";
+
 export const metadata: Metadata = {
-  title: "Gabriel Pimentel | Desenvolvedor Full-Stack",
+  metadataBase: new URL(siteUrl),
+  title,
   description,
+  alternates: { canonical: "/" },
   openGraph: {
-    title: "Gabriel Pimentel | Desenvolvedor Full-Stack",
+    title,
     description,
+    url: "/",
     type: "website",
     locale: "pt_BR",
     siteName: "Gabriel Pimentel",
   },
+  twitter: { card: "summary_large_image", title, description },
+};
+
+const personJsonLd = {
+  "@context": "https://schema.org",
+  "@type": "Person",
+  name: "Gabriel Pimentel",
+  jobTitle: "Desenvolvedor Full-Stack",
+  description,
+  url: siteUrl,
+  email: `mailto:${email}`,
+  address: {
+    "@type": "PostalAddress",
+    addressLocality: "Brasília",
+    addressCountry: "BR",
+  },
+  sameAs: [github.href, linkedin.href, instagram.href],
+  knowsAbout: [...languages, ...stackLayers.flatMap(layer => layer.skills)].map(
+    skill => skill.name,
+  ),
 };
 
 export default function RootLayout({
@@ -46,6 +74,11 @@ export default function RootLayout({
       <body
         className={`${inter.variable} ${jetbrainsMono.variable} ${bricolage.variable} overflow-x-hidden antialiased`}
       >
+        <script
+          type="application/ld+json"
+          // biome-ignore lint/security/noDangerouslySetInnerHtml: JSON-LD estático, montado só com constantes do repositório
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(personJsonLd) }}
+        />
         <ThemeProvider
           attribute="class"
           defaultTheme="dark"

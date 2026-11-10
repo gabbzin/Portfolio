@@ -14,6 +14,7 @@ import {
 } from "react";
 import { detectMode, isCompact, type Mode } from "@/lib/capability";
 import { gsap, ScrollTrigger } from "@/lib/gsap";
+import { useRecruiterMode } from "@/lib/recruiter-mode";
 import { smoothScroll } from "./smooth-scroll";
 
 // O three.js fica num chunk à parte, baixado só no modo 3D e depois do
@@ -51,7 +52,8 @@ export function Journey({ children }: { children: ReactNode }) {
   );
   const compact = useSyncExternalStore(subscribe, isCompact, () => false);
   const [failed, setFailed] = useState(false);
-  const mode: Mode = failed ? "static" : initial;
+  const recruiter = useRecruiterMode();
+  const mode: Mode = failed || recruiter ? "static" : initial;
 
   useEffect(() => {
     if (mode !== "3d") return;

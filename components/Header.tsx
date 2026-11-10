@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { navItems } from "@/consts/nav";
+import { RecruiterToggle } from "./RecruiterToggle";
 import { Sidebar } from "./Sidebar";
 import { AnimatedThemeToggler } from "./ui/animated-theme-toggler";
 
@@ -31,6 +32,7 @@ export default function Header() {
         </nav>
 
         <div className="flex items-center gap-2">
+          <RecruiterToggle />
           <AnimatedThemeToggler />
           <div className="md:hidden">
             <Sidebar />

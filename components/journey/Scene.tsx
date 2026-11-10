@@ -16,12 +16,19 @@ const palette = {
 
 interface SceneProps {
   compact: boolean;
+  /** Falso quando a página está parada: o loop de render pausa. */
+  active: boolean;
   onReady: () => void;
   onContextLost: () => void;
 }
 
 /** A cena inteira: o globo de pontos e tudo o que a viagem acende nele. */
-export default function Scene({ compact, onReady, onContextLost }: SceneProps) {
+export default function Scene({
+  compact,
+  active,
+  onReady,
+  onContextLost,
+}: SceneProps) {
   // O contexto do React não atravessa o <Canvas>: o tema é lido aqui fora.
   const { resolvedTheme } = useTheme();
   const dark = resolvedTheme !== "light";
@@ -30,6 +37,7 @@ export default function Scene({ compact, onReady, onContextLost }: SceneProps) {
   return (
     <Canvas
       dpr={[1, 1.5]}
+      frameloop={active ? "always" : "never"}
       gl={{ antialias: true, alpha: true, powerPreference: "high-performance" }}
       camera={{ fov: 45, near: 0.1, far: 20 }}
       onCreated={({ gl }) => {

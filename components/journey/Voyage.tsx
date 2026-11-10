@@ -151,11 +151,15 @@ export function Voyage() {
                     onClick={() => goTo(act.start)}
                     aria-current={active ? "step" : undefined}
                     className={cn(
-                      "inline-flex min-h-11 min-w-11 cursor-pointer items-center gap-2 font-mono text-xs uppercase tracking-widest transition-opacity duration-500",
-                      active ? "opacity-100" : "opacity-50 hover:opacity-100",
+                      "inline-flex min-h-11 min-w-11 cursor-pointer items-center gap-2 font-mono text-xs uppercase tracking-widest transition-colors duration-500",
+                      // Cor em vez de opacidade: as paradas inativas
+                      // continuam com contraste AA.
+                      active
+                        ? "text-foreground"
+                        : "text-muted-foreground hover:text-foreground",
                     )}
                   >
-                    <span className="text-highlight">
+                    <span className={cn(active && "text-highlight")}>
                       {String(index).padStart(2, "0")}
                     </span>
                     <span className="max-lg:sr-only">{stop}</span>
