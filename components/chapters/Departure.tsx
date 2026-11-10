@@ -1,5 +1,4 @@
 import { Download } from "lucide-react";
-import { DotGridBackground } from "@/components/DotGridBackground";
 import { chapterLabel } from "@/components/journey/ChapterHeading";
 import { ChapterSection } from "@/components/journey/ChapterSection";
 import { Button } from "@/components/ui/button";
@@ -10,14 +9,8 @@ export function Departure() {
   const { title, lede } = getChapter("partida");
 
   return (
-    <ChapterSection
-      id="partida"
-      className="flex min-h-svh items-center overflow-hidden pt-28"
-    >
-      {/* Sai na fase 2, quando o globo de pontos assume a textura. */}
-      <DotGridBackground />
-
-      <div className="relative max-w-3xl space-y-6">
+    <ChapterSection id="partida" className="flex min-h-svh items-center pt-28">
+      <div className="max-w-3xl space-y-6">
         <p className="font-mono text-highlight text-sm">
           {chapterLabel("partida")} · {title}
         </p>
