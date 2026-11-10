@@ -1,19 +1,26 @@
-import { AboutSection } from "@/components/main/AboutSection";
-import { ContactSection } from "@/components/main/ContactSection";
-import { ExperienceSection } from "@/components/main/ExperienceSection";
-import { HeroSection } from "@/components/main/HeroSection";
-import { ProjectsSection } from "@/components/main/ProjectsSection";
-import { SkillsSection } from "@/components/main/SkillsSection";
+import { Arrival } from "@/components/chapters/Arrival";
+import { Crossing } from "@/components/chapters/Crossing";
+import { Departure } from "@/components/chapters/Departure";
+import { FirstSteps } from "@/components/chapters/FirstSteps";
+import { Harbor } from "@/components/chapters/Harbor";
+import { Projects } from "@/components/chapters/Projects";
+import { Stack } from "@/components/chapters/Stack";
+import { JourneyRoot } from "@/components/journey/JourneyRoot";
+import { SceneCanvas } from "@/components/journey/SceneCanvas";
 
 export default function Home() {
   return (
-    <main>
-      <HeroSection />
-      <ProjectsSection />
-      <ExperienceSection />
-      <SkillsSection />
-      <AboutSection />
-      <ContactSection />
-    </main>
+    <>
+      <SceneCanvas />
+      <JourneyRoot>
+        <Departure />
+        <FirstSteps />
+        <Stack />
+        <Projects />
+        <Harbor />
+        <Crossing />
+        <Arrival />
+      </JourneyRoot>
+    </>
   );
 }

@@ -67,6 +67,8 @@
 @theme inline {
   --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
   --font-mono: var(--font-jetbrains-mono), ui-monospace, monospace;
+  --font-display:
+    var(--font-bricolage), var(--font-inter), system-ui, sans-serif;
 }
 
 /* --- 3. Variáveis de CSS (tema claro) --- */

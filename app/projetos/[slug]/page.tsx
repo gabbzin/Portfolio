@@ -52,7 +52,7 @@ export default async function ProjectPage({ params }: PageProps) {
   const { caseStudy } = project;
 
   return (
-    <main className="bg-background pt-28 pb-24">
+    <main id="conteudo" className="bg-background pt-28 pb-24">
       <div className="container max-w-3xl space-y-10">
         <Link
           href="/#projetos"

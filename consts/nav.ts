@@ -13,10 +13,11 @@ interface NavItem {
   icon: LucideIcon;
 }
 
+// Na ordem das paradas da viagem.
 export const navItems: NavItem[] = [
+  { name: "Stack", href: "/#stack", icon: Layers },
   { name: "Projetos", href: "/#projetos", icon: Folder },
   { name: "Experiência", href: "/#experiencia", icon: Briefcase },
-  { name: "Stack", href: "/#stack", icon: Layers },
   { name: "Sobre", href: "/#sobre", icon: User },
   { name: "Contato", href: "/#contato", icon: Mail },
 ];

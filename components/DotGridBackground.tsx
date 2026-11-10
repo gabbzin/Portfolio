@@ -1,6 +1,5 @@
 "use client";
 
-import { useReducedMotion } from "framer-motion";
 import { useEffect, useRef } from "react";
 
 const SPACING = 28;
@@ -8,9 +7,11 @@ const RADIUS = 140;
 
 export function DotGridBackground() {
   const canvasRef = useRef<HTMLCanvasElement>(null);
-  const reduceMotion = useReducedMotion();
 
   useEffect(() => {
+    const reduceMotion = window.matchMedia(
+      "(prefers-reduced-motion: reduce)",
+    ).matches;
     const canvas = canvasRef.current;
     const ctx = canvas?.getContext("2d");
     if (!canvas || !ctx) return;
@@ -69,7 +70,7 @@ export function DotGridBackground() {
       window.removeEventListener("pointermove", onMove);
       cancelAnimationFrame(frame);
     };
-  }, [reduceMotion]);
+  }, []);
 
   return (
     // biome-ignore lint/a11y/noAriaHiddenOnFocusable: canvas decorativo, não é focável

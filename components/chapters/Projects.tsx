@@ -1,43 +1,23 @@
-"use client";
-
-import { motion, useReducedMotion } from "framer-motion";
 import { ArrowRight, ExternalLink, Github } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
-import { SectionHeading } from "@/components/SectionHeading";
+import { ChapterHeading } from "@/components/journey/ChapterHeading";
+import { ChapterSection } from "@/components/journey/ChapterSection";
 import { Badge } from "@/components/ui/badge";
 import { projects } from "@/consts/projects";
-import { fadeUp, stagger } from "@/lib/motion";
 
 const linkClass =
   "inline-flex min-h-11 items-center gap-1.5 text-muted-foreground text-sm transition-colors hover:text-foreground";
 
-export function ProjectsSection() {
-  const reduceMotion = useReducedMotion();
-
+export function Projects() {
   return (
-    <section id="projetos" className="bg-surface py-24">
-      <div className="container">
-        <SectionHeading
-          label="// projetos"
-          title="Projetos em destaque"
-          description="Aplicações completas que construí, do banco de dados à interface."
-        />
+    <ChapterSection id="projetos">
+      <ChapterHeading id="projetos" />
 
-        <motion.div
-          className="grid gap-6 md:grid-cols-2 lg:grid-cols-3"
-          variants={stagger}
-          initial={reduceMotion ? "visible" : "hidden"}
-          whileInView="visible"
-          viewport={{ once: true, margin: "-80px" }}
-        >
-          {projects.map(project => (
-            <motion.article
-              key={project.slug}
-              variants={fadeUp}
-              whileHover={reduceMotion ? undefined : { y: -4 }}
-              className="flex flex-col overflow-hidden rounded-xl border bg-card"
-            >
+      <ul className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+        {projects.map(project => (
+          <li key={project.slug} className="flex">
+            <article className="flex flex-1 flex-col overflow-hidden rounded-xl border bg-card">
               <div className="relative aspect-video overflow-hidden bg-code">
                 {project.image ? (
                   <Image
@@ -48,8 +28,8 @@ export function ProjectsSection() {
                     className="object-cover"
                   />
                 ) : (
-                  <div className="flex size-full items-center justify-center bg-linear-to-br from-code to-card p-6">
-                    <span className="text-center font-semibold text-2xl text-highlight">
+                  <div className="flex size-full items-center justify-center p-6">
+                    <span className="text-center font-display font-semibold text-2xl text-highlight">
                       {project.name}
                     </span>
                   </div>
@@ -111,10 +91,10 @@ export function ProjectsSection() {
                   )}
                 </div>
               </div>
-            </motion.article>
-          ))}
-        </motion.div>
-      </div>
-    </section>
+            </article>
+          </li>
+        ))}
+      </ul>
+    </ChapterSection>
   );
 }

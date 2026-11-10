@@ -1,13 +1,15 @@
 # Portfólio — Gabriel Pimentel
 
-Landing page pessoal de Gabriel Pimentel, desenvolvedor Full-Stack em Brasília. Apresenta projetos (com estudo de caso), stack, sobre e um formulário de contato que envia e-mail.
+Landing page pessoal de Gabriel Pimentel, desenvolvedor Full-Stack em Brasília. A home é uma viagem em sete capítulos ("A Volta ao Mundo"), da partida em Brasília ao contato, com estudo de caso por projeto e um formulário que envia e-mail.
 
 
 ## Stack
 
 - Next.js 16 (App Router) e React 19
 - Tailwind CSS 4 e shadcn/ui
-- framer-motion e next-themes
+- GSAP (ScrollTrigger) e Lenis para scroll e animação
+- three e React Three Fiber para a cena 3D
+- zustand (progresso da viagem) e next-themes
 - react-hook-form e zod
 - Resend (envio de e-mail)
 - Biome (lint e formatação)
@@ -27,9 +29,12 @@ Abra [http://localhost:3000](http://localhost:3000).
 | `pnpm dev`   | Servidor de desenvolvimento |
 | `pnpm build` | Build de produção           |
 | `pnpm lint`  | Lint e formatação (Biome)   |
+| `pnpm typecheck` | Checagem de tipos (tsc) |
 
 ## Estrutura
 
 - `app/`: rotas, layout e server action de e-mail
-- `components/main/`: seções da landing
-- `consts/`: dados de projetos, skills e navegação
+- `components/chapters/`: os sete capítulos da viagem
+- `components/journey/`: scroll suave, progresso por capítulo e o Canvas 3D
+- `lib/journey-store.ts`: estado da viagem, escrito pelo ScrollTrigger e lido pela cena
+- `consts/`: capítulos, projetos, primeiros passos, stack, experiência e navegação
