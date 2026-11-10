@@ -1,19 +1,14 @@
-import { AboutSection } from "@/components/main/AboutSection";
-import { ContactSection } from "@/components/main/ContactSection";
-import { ExperienceSection } from "@/components/main/ExperienceSection";
-import { HeroSection } from "@/components/main/HeroSection";
-import { ProjectsSection } from "@/components/main/ProjectsSection";
-import { SkillsSection } from "@/components/main/SkillsSection";
+import { Arrival } from "@/components/journey/Arrival";
+import { Departure } from "@/components/journey/Departure";
+import { Journey } from "@/components/journey/Journey";
+import { VoyageActs } from "@/components/journey/VoyageActs";
 
 export default function Home() {
   return (
-    <main>
-      <HeroSection />
-      <ProjectsSection />
-      <ExperienceSection />
-      <SkillsSection />
-      <AboutSection />
-      <ContactSection />
-    </main>
+    <Journey>
+      <Departure />
+      <VoyageActs />
+      <Arrival />
+    </Journey>
   );
 }

@@ -34,3 +34,13 @@ export const experiences: Experience[] = [
     ],
   },
 ];
+
+/**
+ * Como os destaques da experiência se dividem pelas cenas do porto. Os índices
+ * apontam para `highlights`: ao reordenar a lista, ajuste aqui também.
+ */
+export const harborScenes = [
+  { label: "Navios · jobs na fila", highlights: [0, 1] },
+  { label: "Guindastes · workers", highlights: [3, 2] },
+  { label: "Farol · monitoramento", highlights: [5, 4] },
+] as const;

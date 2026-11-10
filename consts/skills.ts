@@ -11,7 +11,9 @@ import {
   SiNodedotjs,
   SiPostgresql,
   SiPrisma,
+  SiPrometheus,
   SiReact,
+  SiRedis,
   SiTailwindcss,
   SiTypescript,
 } from "react-icons/si";
@@ -23,23 +25,24 @@ interface Skill {
   color?: string;
 }
 
-interface SkillCategory {
+interface StackLayer {
+  /** Camada do mundo no corte transversal do continente. */
+  world: string;
   title: string;
   description: string;
   skills: Skill[];
 }
 
-export const skillCategories: SkillCategory[] = [
+export const languages: Skill[] = [
+  { name: "TypeScript", icon: SiTypescript, color: "#3178c6" },
+  { name: "JavaScript", icon: SiJavascript, color: "#f7df1e" },
+  { name: "HTML/CSS", icon: SiHtml5, color: "#e34f26" },
+];
+
+// De cima para baixo, na ordem em que as camadas aparecem no corte.
+export const stackLayers: StackLayer[] = [
   {
-    title: "Linguagens",
-    description: "A base de tudo que escrevo.",
-    skills: [
-      { name: "TypeScript", icon: SiTypescript, color: "#3178c6" },
-      { name: "JavaScript", icon: SiJavascript, color: "#f7df1e" },
-      { name: "HTML/CSS", icon: SiHtml5, color: "#e34f26" },
-    ],
-  },
-  {
+    world: "Céu",
     title: "Frontend",
     description: "Interfaces rápidas, acessíveis e responsivas.",
     skills: [
@@ -49,6 +52,7 @@ export const skillCategories: SkillCategory[] = [
     ],
   },
   {
+    world: "Terra",
     title: "Backend",
     description: "APIs, regras de negócio e acesso a dados.",
     skills: [
@@ -59,13 +63,23 @@ export const skillCategories: SkillCategory[] = [
     ],
   },
   {
-    title: "Dados e infra",
-    description: "Banco, contêineres e o ambiente onde tudo roda.",
+    world: "Subsolo",
+    title: "Banco de dados",
+    description: "Onde os dados ficam guardados e as filas se apoiam.",
     skills: [
       { name: "PostgreSQL", icon: SiPostgresql, color: "#4169e1" },
+      { name: "Redis", icon: SiRedis, color: "#ff4438" },
+    ],
+  },
+  {
+    world: "Oceano",
+    title: "Infra",
+    description: "Contêineres, monitoramento e o ambiente onde tudo roda.",
+    skills: [
       { name: "Docker", icon: SiDocker, color: "#2496ed" },
       { name: "Linux", icon: SiLinux, color: "#fcc624" },
       { name: "Git/GitHub", icon: SiGit, color: "#f05032" },
+      { name: "Prometheus", icon: SiPrometheus, color: "#e6522c" },
     ],
   },
 ];
