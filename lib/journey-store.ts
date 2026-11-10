@@ -1,39 +1,25 @@
 import { create } from "zustand";
-import { chapters } from "@/consts/chapters";
 
 interface JourneyState {
-  /** Índice do capítulo que cruza o centro da tela. */
-  activeChapter: number;
-  /** Progresso da página inteira, de 0 a 1. */
-  progress: number;
-  /**
-   * Posição na viagem em "paradas": 0 é o primeiro capítulo centralizado na
-   * tela, 1 o segundo, e os valores fracionários são o trecho entre eles.
-   */
-  travel: number;
-  /** Progresso de cada capítulo, de 0 a 1, na ordem de `chapters`. */
-  chapterProgress: number[];
-  setActiveChapter: (index: number) => void;
-  setProgress: (progress: number) => void;
-  setTravel: (travel: number) => void;
-  setChapterProgress: (index: number, progress: number) => void;
+  /** Hero: 0 no topo, 1 quando saiu da tela. */
+  hero: number;
+  /** Viagem fixada: de 0 a VOYAGE_BEATS, um por passo. */
+  voyage: number;
+  /** Chegada: 0 quando a seção entra, 1 no fim da página. */
+  arrival: number;
+  /** Ponteiro normalizado de -1 a 1, para o parallax da câmera. */
+  pointer: { x: number; y: number };
+  /** Falso até o primeiro movimento de mouse (em telas de toque, sempre). */
+  pointerActive: boolean;
 }
 
-// O ScrollTrigger é a única fonte de progresso: ele escreve aqui e o DOM e a
-// cena 3D só leem. A cena lê com `getState()` dentro do useFrame, sem seletor,
-// para que o scroll não cause re-render do React.
-export const useJourneyStore = create<JourneyState>(set => ({
-  activeChapter: 0,
-  progress: 0,
-  travel: 0,
-  chapterProgress: chapters.map(() => 0),
-  setActiveChapter: activeChapter => set({ activeChapter }),
-  setProgress: progress => set({ progress }),
-  setTravel: travel => set({ travel }),
-  setChapterProgress: (index, progress) =>
-    set(state => {
-      const chapterProgress = state.chapterProgress.slice();
-      chapterProgress[index] = progress;
-      return { chapterProgress };
-    }),
+// O ScrollTrigger é a única fonte de progresso: cada seção escreve o seu
+// trecho aqui e a cena lê com `getState()` dentro do useFrame. Nenhum
+// componente assina estes campos, então rolar não re-renderiza o React.
+export const useJourneyStore = create<JourneyState>(() => ({
+  hero: 0,
+  voyage: 0,
+  arrival: 0,
+  pointer: { x: 0, y: 0 },
+  pointerActive: false,
 }));

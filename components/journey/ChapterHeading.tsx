@@ -9,7 +9,7 @@ export function ChapterHeading({ id }: { id: ChapterId }) {
   const { title, lede } = getChapter(id);
 
   return (
-    <header className="mb-12 max-w-3xl">
+    <header className="mb-10 max-w-3xl">
       <p className="font-mono text-highlight text-sm">{chapterLabel(id)}</p>
       <h2
         id={`${id}-titulo`}
